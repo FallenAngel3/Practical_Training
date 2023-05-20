@@ -41,9 +41,8 @@
                 success: function (res) {
                     var data = res.data;
                     for (var i = 0; i < data.length; i++) {
-                        $("select").append("<option value='" + data[i].id + "'>" +
-                            data[i].class_name +
-                            "</option>")
+                        $("select").append("<option value='" + data[i].id + "'>" + data[i].class_name +
+                        "</option>")
                     }
                 },
                 error: function (ref) {

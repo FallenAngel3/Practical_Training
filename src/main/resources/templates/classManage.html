@@ -47,6 +47,10 @@
         function del(id) {
             location.href = "http://localhost:8080/class/class_del?id=" + id;
         }
+
+        function back(){
+            location.href = "http://localhost:8080/user/index";
+        }
     </script>
 </head>
 <body>
@@ -56,6 +60,9 @@
         <div class="col-md-10 column">
             <button onclick="add()" type="button" class="btn btn-lg btn-block btn-primary" style="margin-top: 5%">
                 新增
+            </button>
+            <button onclick="back()" type="button" class="btn btn-default btn-block btn-info">
+                返回
             </button>
             <table class="table table-bordered table-hover table-condensed">
                 <thead>
