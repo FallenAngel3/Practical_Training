@@ -35,6 +35,24 @@
         })
     </script>
     <script type="text/javascript">
+        $(function () {
+            $.ajax({
+                url: "http://localhost:8080/class/classList",
+                dataType: "json",
+                type: "get",
+                success: function (res) {
+                    var data = res.data;
+                    for (var i = 0; i < data.length; i++) {
+                        $("select").append("<option class='class_name' value='" + data[i].id + "'>" +
+                            data[i].class_name +
+                            "</option>")
+                    }
+                },
+                error: function (ref) {
+
+                }
+            })
+        })
         $(function (){
             var id=$("#id").val();
             $.ajax({
@@ -53,27 +71,14 @@
                             this.checked = true;
                         }
                     })
+                    $(".class_name").map(function (){
+                        if (this.value == data.class_id){
+                            this.selected = true;
+                        }
+                    })
                     $("#commodity_num").val(data.commodity_num);
                 },
                 error:function (ref){
-
-                }
-            })
-        })
-        $(function () {
-            $.ajax({
-                url: "http://localhost:8080/class/classList",
-                dataType: "json",
-                type: "get",
-                success: function (res) {
-                    var data = res.data;
-                    for (var i = 0; i < data.length; i++) {
-                        $("select").append("<option value='" + data[i].id + "'>" +
-                            data[i].class_name +
-                            "</option>")
-                    }
-                },
-                error: function (ref) {
 
                 }
             })
