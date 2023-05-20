@@ -48,8 +48,13 @@
             location.href = "http://localhost:8080/class/class_del?id=" + id;
         }
 
-        function back(){
+        /*function back(){
             location.href = "http://localhost:8080/commodity/commodity_toAdd";
+        }*/
+        function back(){
+            var returnUrl = 'http://localhost:8080/commodity/commodity_toAdd';
+            returnUrl += '?fromClassManage=true'; // 添加参数标识从classManage页面返回
+            location.href = returnUrl;
         }
 
     </script>
