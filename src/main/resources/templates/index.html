@@ -67,14 +67,14 @@
         }
     </script>
 </head>
-<body background="/img/background.jpg" style=" background-repeat:no-repeat ;background-size:100% 100%; background-attachment: fixed;">
+<body background="/img/background.jpg"
+      style=" background-repeat:no-repeat ;background-size:100% 100%; background-attachment: fixed;">
 <div class="container">
     <div class="row clearfix">
         <div class="col-md-12 column">
             <button onclick="add()" type="button" class="btn btn-block btn-lg btn-info" style="margin-top: 10%">
                 新增
             </button>
-            <table style="background: #ffffff" class="table table-bordered table-hover">
             <div class="form-group">
                 <label for="statusFilter">筛选状态：</label>
                 <select id="statusFilter" class="form-control" onchange="filterStatus()">
@@ -83,7 +83,7 @@
                     <option value="未上架">未上架</option>
                 </select>
             </div>
-            <table class="table table-bordered table-hover">
+            <table style="background: #ffffff" class="table table-bordered table-hover">
                 <thead>
                 <tr>
                     <th width="40%">
@@ -113,7 +113,9 @@
                 <!-- 商品列表将动态生成 -->
                 </tbody>
             </table>
-            <nav class="navbar navbar-default navbar-fixed-top navbar-inverse" role="navigation">
+
+            <!--上导航栏-->
+            <!--<nav class="navbar navbar-default navbar-fixed-top navbar-inverse" role="navigation">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse"
                             data-target="#bs-example-navbar-collapse-1"><span
@@ -189,7 +191,7 @@
                     </ul>
                 </div>
 
-            </nav>
+            </nav>-->
         </div>
     </div>
 </div>
