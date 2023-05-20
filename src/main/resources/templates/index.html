@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>主页</title>
+    <!-- 新 Bootstrap 核心 CSS 文件 -->
+    <link href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $.ajax({
+                url: "http://localhost:8080/commodity/commodityList",
+                dataType: "json",
+                type: "get",
+                success: function (res) {
+                    var data = res.data;
+                    for (var i = 0; i < data.length; i++) {
+                        $("table").append("<tr>" +
+                            "<td>" + data[i].commodity_name + "</td>" +
+                            "<td>" + data[i].class_name + "</td>" +
+                            "<td>" + data[i].commodity_price + "</td>" +
+                            "<td>" +
+                            "<img height='50px' width='auto' src=" + data[i].commodity_img + "></img>" +
+                            "</td>" +
+                            "<td>" + data[i].commodity_status + "</td>" +
+                            "<td>" + data[i].commodity_num + "</td>" +
+                            "<td>" +
+                            "<button onclick='upd(" + data[i].id + ")' class='btn btn-success btn-default'>修改</button>" +
+                            "<button onclick='del(" + data[i].id + ")' class='btn btn-default btn-danger'>删除</button>" +
+                            "</td>" +
+                            "</tr>")
+                    }
+                },
+                error: function (ref) {
+
+                }
+            })
+        })
+
+        function add() {
+            location.href = "http://localhost:8080/commodity/commodity_toAdd"
+        }
+
+        function upd(id) {
+            location.href = "http://localhost:8080/commodity/commodity_toUpd?id=" + id;
+        }
+
+        function del(id) {
+            location.href = "http://localhost:8080/commodity/commodity_del?id=" + id;
+        }
+    </script>
+</head>
+<body>
+<div class="container">
+    <div class="row clearfix">
+        <div class="col-md-12 column">
+            <button onclick="add()" type="button" class="btn btn-lg btn-block btn-primary" style="margin-top: 10%">
+                新增
+            </button>
+            <table class="table table-bordered table-hover">
+                <thead>
+                <tr>
+                    <th>
+                        商品名称
+                    </th>
+                    <th>
+                        商品类别
+                    </th>
+                    <th>
+                        商品价格
+                    </th>
+                    <th>
+                        图片
+                    </th>
+                    <th>
+                        状态
+                    </th>
+                    <th>
+                        库存
+                    </th>
+                    <th>
+                        操作
+                    </th>
+                </tr>
+                </thead>
+            </table>
+            <nav class="navbar navbar-default navbar-fixed-top navbar-inverse" role="navigation">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse"
+                            data-target="#bs-example-navbar-collapse-1"><span
+                            class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span
+                            class="icon-bar"></span><span class="icon-bar"></span></button>
+                    <a class="navbar-brand" href="#">Brand</a>
+                </div>
+
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li class="active">
+                            <a href="#">Link</a>
+                        </li>
+                        <li>
+                            <a href="#">Link</a>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown<strong
+                                    class="caret"></strong></a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="#">Action</a>
+                                </li>
+                                <li>
+                                    <a href="#">Another action</a>
+                                </li>
+                                <li>
+                                    <a href="#">Something else here</a>
+                                </li>
+                                <li class="divider">
+                                </li>
+                                <li>
+                                    <a href="#">Separated link</a>
+                                </li>
+                                <li class="divider">
+                                </li>
+                                <li>
+                                    <a href="#">One more separated link</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <form class="navbar-form navbar-left" role="search">
+                        <div class="form-group">
+                            <input type="text" class="form-control"/>
+                        </div>
+                        <button type="submit" class="btn btn-default">Submit</button>
+                    </form>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="#">Link</a>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown<strong
+                                    class="caret"></strong></a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="#">Action</a>
+                                </li>
+                                <li>
+                                    <a href="#">Another action</a>
+                                </li>
+                                <li>
+                                    <a href="#">Something else here</a>
+                                </li>
+                                <li class="divider">
+                                </li>
+                                <li>
+                                    <a href="#">Separated link</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+
+            </nav>
+        </div>
+    </div>
+</div>
+</body>
+</html>

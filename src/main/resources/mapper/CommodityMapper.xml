@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mapper.CommodityMapper">
+    <insert id="add" parameterType="com.example.demo.bean.Commodity">
+        insert into qianfeng.commodity values (null, #{class_id}, #{commodity_name}, #{commodity_price}, #{commodity_num}, #{commodity_status}, #{commodity_img});
+    </insert>
+    <update id="upd" parameterType="com.example.demo.bean.Commodity">
+        update qianfeng.commodity set class_id=#{class_id}, commodity_name=#{commodity_name}, commodity_price=#{commodity_price}, commodity_img=#{commodity_img}, commodity_status=#{commodity_status}, commodity_num=#{commodity_num} where id=#{id};
+    </update>
+    <delete id="del" parameterType="int">
+        delete from qianfeng.commodity where id = #{id};
+    </delete>
+
+    <select id="commodityList" resultType="com.example.demo.bean.Commodity">
+        select commodity.id, commodity_class.class_name, commodity.commodity_name, commodity.commodity_price, commodity.commodity_num, commodity.commodity_status, commodity.commodity_img from qianfeng.commodity, qianfeng.commodity_class where qianfeng.commodity.class_id = qianfeng.commodity_class.id;
+    </select>
+    <select id="getCommodityById" parameterType="int" resultType="com.example.demo.bean.Commodity">
+        select * from qianfeng.commodity where id = #{id};
+    </select>
+</mapper>

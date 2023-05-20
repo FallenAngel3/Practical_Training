@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>修改</title>
+    <!-- 新 Bootstrap 核心 CSS 文件 -->
+    <link href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+        $(function (){
+            $("#commodity_file").change(function (){
+                var file = $("#commodity_file")[0].files[0];
+                var formData = new FormData();
+                formData.append("file", file);
+                $.ajax({
+                    url:"http://localhost:8080/upload",
+                    type:"post",
+                    data:formData,
+                    processData: false,
+                    contentType: false,
+                    success:function (res){
+                        $("#img").attr("src",res.img);
+                        $("#file1").val(res.img);
+                    },
+                    error:function (ref){
+
+                    }
+                })
+            })
+        })
+    </script>
+    <script type="text/javascript">
+        $(function (){
+            var id=$("#id").val();
+            $.ajax({
+                url:"http://localhost:8080/commodity/getCommodityById?id="+id,
+                dataType:"json",
+                type:"get",
+                success:function (res){
+                    var data = res.data;
+                    $("#id").val(data.id);
+                    $("#commodity_name").val(data.commodity_name);
+                    $("#commodity_price").val(data.commodity_price);
+                    $("#img").attr("src", data.commodity_img);
+                    $("#file1").val(data.commodity_img);
+                    $(".commodity_status").map(function (){
+                        if (this.value == data.commodity_status){
+                            this.checked = true;
+                        }
+                    })
+                    $("#commodity_num").val(data.commodity_num);
+                },
+                error:function (ref){
+
+                }
+            })
+        })
+        $(function () {
+            $.ajax({
+                url: "http://localhost:8080/class/classList",
+                dataType: "json",
+                type: "get",
+                success: function (res) {
+                    var data = res.data;
+                    for (var i = 0; i < data.length; i++) {
+                        $("select").append("<option value='" + data[i].id + "'>" +
+                            data[i].class_name +
+                            "</option>")
+                    }
+                },
+                error: function (ref) {
+
+                }
+            })
+        })
+    </script>
+</head>
+<body>
+<div class="container">
+    <div class="row clearfix">
+        <div class="col-md-4 column">
+        </div>
+        <div class="col-md-4 column">
+            <form role="form" action="http://localhost:8080/commodity/upd" method="post" style="margin-top: 10%">
+                <input type="text" name="id" id="id" hidden="hidden" th:value="${id}">
+                <div class="form-group">
+                    <label>商品名称</label><input type="text" name="commodity_name" class="form-control" id="commodity_name"/>
+                </div>
+                <div class="form-group">
+                    <label>商品价格</label><input type="text" name="commodity_price" class="form-control" id="commodity_price"/>
+                </div>
+                <div class="form-group">
+                    <label>商品图片</label>
+                    <br>
+                    <input type="file" name="commodity_file" class="form-control" id="commodity_file"/>
+                    <input type="text" name="commodity_img" hidden="hidden" id="file1">
+                    <img src="" id="img" width="200px" height="auto">
+                </div>
+                <div class="form-group">
+                    <label>商品状态</label>
+                    <input type="radio" name="commodity_status" class="commodity_status" value="未上架"/>未上架
+                    <input type="radio" name="commodity_status" class="commodity_status" value="已上架"/>已上架
+                </div>
+                <div class="form-group">
+                    <label>商品类别</label>
+                    <select name="class_id"><!--下拉列表--></select>
+                    <button type="button" onclick="classManage()" class="btn btn-default btn-primary">类别管理</button>
+                </div>
+                <div class="form-group">
+                    <label>商品库存</label><input type="number" name="commodity_num" class="form-control" id="commodity_num"/>
+                </div>
+                <button type="submit" class="btn btn-success btn-default">修改</button>
+            </form>
+        </div>
+        <div class="col-md-4 column">
+        </div>
+    </div>
+</div>
+</body>
+</html>

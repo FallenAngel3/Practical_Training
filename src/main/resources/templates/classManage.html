@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>类别管理</title>
+    <!-- 新 Bootstrap 核心 CSS 文件 -->
+    <link href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $.ajax({
+                url: "http://localhost:8080/class/classList",
+                dataType: "json",
+                type: "get",
+                success: function (res) {
+                    var data = res.data;
+                    for (var i = 0; i < data.length; i++) {
+                        $("table").append("<tr>" +
+                            "<td>" + data[i].id + "</td>" +
+                            "<td>" + data[i].class_name + "</td>" +
+                            "<td>" +
+                            "<button style='width: 45%' onclick='upd(" + data[i].id + ")' class='btn btn-default btn-warning'>修改</button>" +
+                            "<button style='margin-left: 5%; width: 45%' onclick='del(" + data[i].id + ")' class='btn btn-default btn-danger'>删除</button>" +
+                            "</td>" +
+                            "</tr>")
+                    }
+                },
+                error: function (ref) {
+
+                }
+            })
+        })
+
+        function add() {
+            location.href = "http://localhost:8080/class/class_toAdd"
+        }
+
+        function upd(id) {
+            location.href = "http://localhost:8080/class/class_toUpd?id=" + id;
+        }
+
+        function del(id) {
+            location.href = "http://localhost:8080/class/class_del?id=" + id;
+        }
+    </script>
+</head>
+<body>
+<div class="container">
+    <div class="row clearfix">
+        <div class="col-md-1 column"></div>
+        <div class="col-md-10 column">
+            <button onclick="add()" type="button" class="btn btn-lg btn-block btn-primary" style="margin-top: 5%">
+                新增
+            </button>
+            <table class="table table-bordered table-hover table-condensed">
+                <thead>
+                <tr>
+                    <th width="30%">
+                        类id
+                    </th>
+                    <th width="30%">
+                        类名
+                    </th>
+                    <th width="40%">
+                        操作
+                    </th>
+                </tr>
+                </thead>
+            </table>
+        </div>
+        <div class="col-md-1 column"></div>
+    </div>
+</div>
+</body>
+</html>
