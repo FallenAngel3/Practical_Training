@@ -11,6 +11,37 @@
 
     <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
     <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <style>
+        body {
+            padding-top: 70px;
+        }
+        .navbar-inverse {
+            margin-bottom: 0;
+        }
+        .container {
+            max-width: 960px;
+        }
+        .btn-primary {
+            background-color: #337ab7;
+            border-color: #337ab7;
+        }
+        .btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active {
+            background-color: #286090;
+            border-color: #204d74;
+        }
+        .table {
+            margin-bottom: 0;
+        }
+        .table th, .table td {
+            text-align: center;
+        }
+        .navbar-brand {
+            padding: 10px 15px;
+        }
+        .navbar-form .form-group {
+            margin-bottom: 0;
+        }
+    </style>
     <script type="text/javascript">
         $(function () {
             $.ajax({
@@ -53,6 +84,18 @@
         function del(id) {
             location.href = "http://localhost:8080/commodity/commodity_del?id=" + id;
         }
+
+        function filterStatus() {
+            var status = $("#statusFilter").val();
+            $("table tbody tr").each(function () {
+                var rowStatus = $(this).find("td:eq(4)").text();
+                if (status === "all" || rowStatus === status) {
+                    $(this).show();
+                } else {
+                    $(this).hide();
+                }
+            });
+        }
     </script>
 </head>
 <body>
@@ -62,6 +105,14 @@
             <button onclick="add()" type="button" class="btn btn-lg btn-block btn-primary" style="margin-top: 10%">
                 新增
             </button>
+            <div class="form-group">
+                <label for="statusFilter">筛选状态：</label>
+                <select id="statusFilter" class="form-control" onchange="filterStatus()">
+                    <option value="all">全部</option>
+                    <option value="已上架">已上架</option>
+                    <option value="未上架">未上架</option>
+                </select>
+            </div>
             <table class="table table-bordered table-hover">
                 <thead>
                 <tr>
@@ -88,6 +139,9 @@
                     </th>
                 </tr>
                 </thead>
+                <tbody>
+                <!-- 商品列表将动态生成 -->
+                </tbody>
             </table>
             <nav class="navbar navbar-default navbar-fixed-top navbar-inverse" role="navigation">
                 <div class="navbar-header">
