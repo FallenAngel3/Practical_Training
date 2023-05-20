@@ -1,6 +1,7 @@
 package com.example.demo.service.Impl;
 
 import com.example.demo.bean.Commodity;
+import com.example.demo.bean.CommodityClass;
 import com.example.demo.mapper.CommodityMapper;
 import com.example.demo.service.CommodityService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,5 +42,29 @@ public class CommodityServiceImpl implements CommodityService {
 	@Override
 	public void upd(Commodity commodity) {
 		commodityMapper.upd(commodity);
+	}
+
+	@Override
+	public Map<String, Object> commodityList1() {
+		List<Commodity> list = commodityMapper.commodityList1();
+		Map<String,Object> map = new HashMap<>();
+		map.put("data",list);
+		return map;
+	}
+
+	@Override
+	public Map<String, Object> commoditycclassList() {
+		List<CommodityClass> list = commodityMapper.commodityclassList();
+		Map<String,Object> map = new HashMap<>();
+		map.put("data",list);
+		return map;
+	}
+
+	@Override
+	public Map<String, Object> findById(int id) {
+		List<Commodity> list = commodityMapper.findById(id);
+		Map<String,Object> map = new HashMap<>();
+		map.put("data",list);
+		return map;
 	}
 }

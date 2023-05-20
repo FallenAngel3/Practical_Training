@@ -62,4 +62,23 @@ public class CommodityController {
 		map.put("data", commodity);
 		return map;
 	}
+
+	@RequestMapping("/commodityList1")
+	@ResponseBody
+	public Map<String, Object> commodityList1(){
+
+		return  commodityService.commodityList1();
+	}
+	@RequestMapping("/commodityclassList")
+	@ResponseBody
+	public Map<String, Object> commodityclassList(){
+
+		return  commodityService.commoditycclassList();
+	}
+	@RequestMapping("/findById")
+	@ResponseBody
+	public Map<String, Object> findById(int id){
+
+		return  commodityService.findById(id);
+	}
 }

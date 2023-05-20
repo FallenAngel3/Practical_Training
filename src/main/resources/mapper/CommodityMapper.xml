@@ -19,4 +19,13 @@
     <select id="getCommodityById" parameterType="int" resultType="com.example.demo.bean.Commodity">
         select * from qianfeng.commodity where id = #{id};
     </select>
+    <select id="commodityList1" resultType="com.example.demo.bean.Commodity">
+        select * from qianfeng.commodity where commodity_status = "已上架"
+    </select>
+    <select id="commodityclassList" resultType="com.example.demo.bean.CommodityClass">
+        select * from qianfeng.commodity_class
+    </select>
+    <select id="findById" resultType="com.example.demo.bean.Commodity" parameterType="int">
+        select * from qianfeng.commodity where class_id = #{id}
+    </select>
 </mapper>

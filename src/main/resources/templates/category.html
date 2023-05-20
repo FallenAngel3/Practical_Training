@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>class</title>
+    <link href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script></head>
+    <style src="/static/css/temp.css"></style>
+    <script type="text/javascript">
+        $(function (){
+            $.ajax({
+                url:"http://localhost:8080/commodity/commodityclassList",
+                dataType:"json",
+                type:"get",
+                success:function (res){
+                    var commodityclass = res.data;
+                    for(var i = 0 ; i<commodityclass.length;i++)
+                    {
+                       $("#ull").append("<li onclick='find("+commodityclass[i].id+")'>"+commodityclass[i].class_name+
+                        "</li>")
+                    }
+                },error(ref){
+                }
+            })
+        })
+        function find(id){
+            $("#left1").html("");
+                $(function (){
+                    $.ajax({
+                        url: "http://localhost:8080/commodity/findById?id="+id,
+                        dataType: "json",
+                        type: "get",
+                        success:function (res){
+                            var data = res.data;
+                            for (var i =0 ;i<data.length;i++){
+                            $("#left1").append("<div style='width: 45%; border: 1px solid black; margin:10px 10px; border-top-left-radius: 25px;border-top-right-radius: 25px;border-bottom-left-radius: 25px; border-bottom-right-radius: 25px; background-color: antiquewhite' >"+
+                                "<div class=\"col-md-2 column\">" +
+                                "<img height='50px' width='auto' src=" + data[i].commodity_img + "></img>" +
+                                "</div>"+"<div class=\"col-md-10 column\" align='left'>"+
+                                "<h4> 产品名：<a href=\"#\">" + data[i].commodity_name + "</h4>" +
+                                "<h4> 仅剩：<a href=\"#\">" + data[i].commodity_num + "</h4>" +
+                                "<h5> 价格：<a href=\"#\">" + data[i].commodity_price + "<h5>" +
+                                "</div>"+
+                                "</div>")
+                            }
+                        },error(ref) {
+                        }
+                    })
+                })
+        }
+    </script>
+</head>
+<body>
+<div class="container" style="margin-left: 0">
+    <div class="row clearfix">
+        <div class="col-md-2 column" style="height: 10000px;width: 160px">
+            <div class="btn-group" >
+                <button class="btn btn-default" >类别</button> <button data-toggle="dropdown" class="btn btn-default dropdown-toggle"><span class="caret"></span></button>
+                <ul class="dropdown-menu" id="ull">
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-10 column"  id="left1" style="display: flex; flex-wrap: wrap;">
+
+        </div>
+    </div>
+</div>
+</body>
+</html>
