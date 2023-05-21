@@ -5,6 +5,7 @@ import com.example.demo.service.CommodityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -80,6 +81,11 @@ public class CommodityController {
 	public Map<String, Object> findById(int id){
 
 		return  commodityService.findById(id);
+	}
+	@RequestMapping("/delsel")
+	public String delsel(@RequestParam(value = "ids", defaultValue = "") String ids){
+		commodityService.delsel(ids);
+		return "redirect:/user/index";
 	}
 
 	@RequestMapping("/indexsearch")
