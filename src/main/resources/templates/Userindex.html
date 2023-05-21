@@ -11,32 +11,72 @@
 
   <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
   <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script></head>
-<style src="/static/css/temp.css"></style>
-<script type="text/javascript">
-  $(function (){
-    $.ajax({
-      url:"http://localhost:8080/commodity/commodityList1",
-      dataType:"json",
-      type:"get",
-      success:function (res){
-        var commodity = res.data;
-        for(var i = 0 ; i<commodity.length;i++)
-        {
-          $("#tab").append("<div style='width: 45%; border: 1px solid black; margin:10px 10px; border-top-left-radius: 25px;border-top-right-radius: 25px;border-bottom-left-radius: 25px; border-bottom-right-radius: 25px; background-color: antiquewhite' >"+
-                  "<div class=\"col-md-2 column\">" +
-                  "<img height='50px' width='auto' src=" + commodity[i].commodity_img + "></img>" +
-                  "</div>"+"<div class=\"col-md-10 column\" align='left'>"+
-                  "<h4> 产品名：<a href=\"#\">" + commodity[i].commodity_name + "</h4>" +
-                  "<h4> 仅剩：<a href=\"#\">" + commodity[i].commodity_num + "</h4>" +
-                  "<h5> 价格：<a href=\"#\">" + commodity[i].commodity_price + "<h5>" +
-                  "</div>"+
-                  "</div>")
-        }
-      },error(ref){
+  <style src="/static/css/temp.css"></style>
+  <script type="text/javascript">
+    $(function (){
+      $.ajax({
+        url:"http://localhost:8080/commodity/commodityList1",
+        dataType:"json",
+        type:"get",
+        success:function (res){
+          var commodity = res.data;
+          for(var i = 0 ; i<commodity.length;i++)
+          {
 
-      }
+            $("#tab").append("<div style='width: 45%; border: 1px solid black; margin:10px 10px; border-radius: 25px 25px 25px 25px; background-color: antiquewhite' class='rm'>"+
+                    "<div class=\"col-md-2 column\">" +
+                    "<img height='80px' width='80px' src=" + commodity[i].commodity_img + " ></img>" +
+                    "</div>"+"<div class=\"col-md-10 column\" align='left'>"+
+                    "<h4> 产品名：<a href=\"#\">" + commodity[i].commodity_name + "</h4>" +
+                    "<h4> 仅剩：<a href=\"#\">" + commodity[i].commodity_num + "</h4>" +
+                    "<h5> 价格：<a href=\"#\">" + commodity[i].commodity_price + "<h5>" +
+                    "</div>"+
+                    "</div>")
+          }
+        },error(ref){
+
+        }
+      })
+      $("#subBtn").click(function (){
+        var input = document.getElementById("sumit");
+        var value = input.value;
+
+        if (!value) {
+          console.log("输入值为空");
+          return;
+        }
+
+        var encodedValue = encodeURIComponent(value);
+
+        $.ajax({
+          url: "http://localhost:8080/commodity/indexsearch?name="+value,
+          dataType: "json",
+          type: "get",
+          success: function(res) {
+
+            var commodity = res.data;
+            $(".rm").remove();
+            for (var i = 0; i < commodity.length; i++) {
+
+              var html = "<div style='width: 45%; border: 1px solid black; border-radius: 25px 25px 25px 25px; background-color: antiquewhite;margin:10px 10px ' class='rm'>" +
+                      "<div class=\"col-md-2 column\">" +
+                      "<img height='50px' width='auto' src=" + commodity[i].commodity_img + "></img>" +
+                      "</div>" +
+                      "<div class=\"col-md-10 column\" align='left'>" +
+                      "<h4> 产品名：<a href=\"#\">" + commodity[i].commodity_name + "</h4>" +
+                      "<h4> 仅剩：<a href=\"#\">" + commodity[i].commodity_num + "</h4>" +
+                      "<h5> 价格：<a href=\"#\">" + commodity[i].commodity_price + "<h5>" +
+                      "</div>" +
+                      "</div>";
+              $("#tab").append(html);
+            }
+          },
+          error: function(ref) {
+          }
+        });
+      })
     })
-  })
+
 </script>
 
 <body>
@@ -57,10 +97,10 @@
               <a href="http://localhost:8080/category">分类</a>
             </li>
           </ul>
-          <form class="navbar-form navbar-left" role="search">
+          <form class="navbar-form navbar-left" role="search" onsubmit="return false">
             <div class="form-group">
-              <input type="text" class="form-control" aria-valuetext="搜索" />
-            </div> <button type="submit" class="btn btn-default" onclick="find()">搜索</button>
+              <input type="text" class="form-control" placeholder="搜索" id="sumit" />
+            </div> <button  class="btn btn-default" id="subBtn">搜索</button>
           </form>
           <ul class="nav navbar-nav navbar-right">
 

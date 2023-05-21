@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
 @Service
 public class CommodityServiceImpl implements CommodityService {
@@ -63,6 +62,14 @@ public class CommodityServiceImpl implements CommodityService {
 	@Override
 	public Map<String, Object> findById(int id) {
 		List<Commodity> list = commodityMapper.findById(id);
+		Map<String,Object> map = new HashMap<>();
+		map.put("data",list);
+		return map;
+	}
+
+	@Override
+	public Map<String, Object> indexsearch(String name) {
+		List<Commodity> list = commodityMapper.indexsearch(name);
 		Map<String,Object> map = new HashMap<>();
 		map.put("data",list);
 		return map;

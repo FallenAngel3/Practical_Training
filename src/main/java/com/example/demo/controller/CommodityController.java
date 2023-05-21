@@ -81,4 +81,11 @@ public class CommodityController {
 
 		return  commodityService.findById(id);
 	}
+
+	@RequestMapping("/indexsearch")
+	@ResponseBody
+	public Map<String, Object> indexsearch(String name){
+
+		return  commodityService.indexsearch(name);
+	}
 }

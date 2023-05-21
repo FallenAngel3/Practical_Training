@@ -22,4 +22,5 @@ public interface CommodityService {
 
 	Map<String, Object> findById(int id);
 
+	Map<String, Object> indexsearch(String name);
 }
