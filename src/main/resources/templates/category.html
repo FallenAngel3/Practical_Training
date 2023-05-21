@@ -38,9 +38,12 @@
                         success:function (res){
                             var data = res.data;
                             for (var i =0 ;i<data.length;i++){
+                                if (data[i].commodity_status == "未上架"){
+                                    continue;
+                                }
                             $("#left1").append("<div style='width: 45%; border: 1px solid black; margin:10px 10px; border-top-left-radius: 25px;border-top-right-radius: 25px;border-bottom-left-radius: 25px; border-bottom-right-radius: 25px; background-color: antiquewhite' >"+
                                 "<div class=\"col-md-2 column\">" +
-                                "<img height='50px' width='auto' src=" + data[i].commodity_img + "></img>" +
+                                "<img height='50px' width='auto' src=" + data[i].commodity_img + " ></img>" +
                                 "</div>"+"<div class=\"col-md-10 column\" align='left'>"+
                                 "<h4> 产品名：<a href=\"#\">" + data[i].commodity_name + "</h4>" +
                                 "<h4> 仅剩：<a href=\"#\">" + data[i].commodity_num + "</h4>" +
@@ -61,7 +64,7 @@
 <body>
 <div class="container" style="margin-left: 0">
     <div class="row clearfix">
-        <div class="col-md-3 column" style="height: 10000px;width: 160px">
+        <div class="col-md-3 column" style="height: auto;width: 160px">
             <div class="btn-group" style="width: 160px">
                 <button onclick="re()" class="btn btn-default" >返回</button>
                 <button class="btn btn-default" >类别</button> <button data-toggle="dropdown" class="btn btn-default dropdown-toggle"><span class="caret"></span></button>
@@ -69,7 +72,7 @@
                 </ul>
             </div>
         </div>
-        <div class="col-md-9 column"  id="left1" style="display: flex; flex-wrap: wrap;">
+        <div class="col-md-6 column"  id="left1" style="display: flex; flex-wrap: wrap; width: 60%">
 
         </div>
     </div>

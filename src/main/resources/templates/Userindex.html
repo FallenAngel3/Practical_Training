@@ -24,7 +24,7 @@
 
             $("#tab").append("<div style='width: 45%; border: 1px solid black; margin:10px 10px; border-radius: 25px 25px 25px 25px; background-color: antiquewhite' class='rm'>"+
                     "<div class=\"col-md-2 column\">" +
-                    "<img height='80px' width='80px' src=" + commodity[i].commodity_img + " ></img>" +
+                    "<img height='50px' width='50px' src=" + commodity[i].commodity_img + " ></img>" +
                     "</div>"+"<div class=\"col-md-10 column\" align='left'>"+
                     "<h4> 产品名：<a href=\"#\">" + commodity[i].commodity_name + "</h4>" +
                     "<h4> 仅剩：<a href=\"#\">" + commodity[i].commodity_num + "</h4>" +
@@ -41,8 +41,7 @@
         var value = input.value;
 
         if (!value) {
-          console.log("输入值为空");
-          return;
+          location.href="http://localhost:8080/userindex";
         }
 
         var encodedValue = encodeURIComponent(value);
@@ -56,7 +55,9 @@
             var commodity = res.data;
             $(".rm").remove();
             for (var i = 0; i < commodity.length; i++) {
-
+              if (commodity[i].commodity_status == "未上架"){
+                continue;
+              }
               var html = "<div style='width: 45%; border: 1px solid black; border-radius: 25px 25px 25px 25px; background-color: antiquewhite;margin:10px 10px ' class='rm'>" +
                       "<div class=\"col-md-2 column\">" +
                       "<img height='50px' width='auto' src=" + commodity[i].commodity_img + "></img>" +
