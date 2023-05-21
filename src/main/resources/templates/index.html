@@ -54,8 +54,23 @@
             location.href = "http://localhost:8080/commodity/commodity_del?id=" + id;
         }
     </script>
+
+    <style>
+        body{
+            background-image: url("/static/img/background.jpg");
+            background-repeat: no-repeat;
+            background-size: 100% 100%;
+            background-attachment: fixed;
+        }
+    </style>
 </head>
-<body background="/img/background.jpg" style=" background-repeat:no-repeat ;background-size:100% 100%; background-attachment: fixed;">
+<body>
+<!--动态背景(注：div里的两个id需要和js文件保持一致)-->
+<div id="background" style="position: absolute; z-index: -2">
+    <canvas id="canvas"></canvas>
+</div>
+<script type="text/javascript" src="/static/js/GeometricBackground.js"></script>
+
 <div class="container">
     <div class="row clearfix">
         <div class="col-md-12 column">
