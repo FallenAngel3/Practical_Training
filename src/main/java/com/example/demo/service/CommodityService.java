@@ -22,4 +22,5 @@ public interface CommodityService {
 
 	Map<String, Object> findById(int id);
 
+    void delsel(String ids);
 }

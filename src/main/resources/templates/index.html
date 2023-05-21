@@ -33,6 +33,9 @@
                             "<button style='width: 50%' onclick='upd(" + data[i].id + ")' class='btn btn-success btn-default'>修改</button>" +
                             "<button style='width: 50%' onclick='del(" + data[i].id + ")' class='btn btn-default btn-danger'>删除</button>" +
                             "</td>" +
+                            "<td>"+
+                            "<input type='checkbox'  name='email' id='delete_id' src="+data[i].id+">"+
+                            "</td>"+
                             "</tr>")
                     }
                 },
@@ -174,6 +177,44 @@
     setInterval(draw, 10)
 
 </script>
+<SCRIPT>
+    //  全选按钮和删除选中按钮功能
+    /* 全选框全选和取消全选 */
+    function selBtn(flag){
+
+        if(flag>1){
+            //大于0反选，等于自己本身选择状态取反
+            let emails = document.getElementsByName("email");
+
+            for (let email of emails) {
+
+            }
+        }else{
+            //为0和1时直接赋给状态，js中0为false，除0外都为true
+            let emails = document.getElementsByName("email");
+            for (let email of emails) {
+                email.checked = flag;
+            }
+            let sels = document.getElementsByName("selAll");
+            for (let selAll of sels) {
+                selAll.checked = flag;
+            }
+        }
+    }
+    function delSel(){
+        var delUrl ="http://localhost:8080/commodity/delsel?ids=";
+        var ids ="";
+        //拿到要删除所有员工的id  $(".single_check:checked")表示选中框被选中的框
+        $("#delete_id:checked").each(function(){
+            //取出我们自定义的id    $(this)表示这全部选中的一个选中框
+            ids=ids+$(this).attr("src")+",";
+        });
+        ids = ids.substring(0,ids.length-1);
+        delUrl +=ids;
+        location.href  = delUrl ;
+    }
+
+</SCRIPT>
 
 <div class="container">
     <div class="row clearfix">
@@ -181,6 +222,9 @@
             <button onclick="add()" type="button" class="btn btn-block btn-lg btn-info" style="margin-top: 10%">
                 新增
             </button>
+            <button type="button" onclick="selBtn(1)">全选</button>
+            <button type="button" onclick="selBtn(0)">取消全选</button>
+            <button type="button" onclick="delSel()">删除所选行</button>
             <div class="form-group">
                 <label for="statusFilter">筛选状态：</label>
                 <select id="statusFilter" class="form-control" onchange="filterStatus()">
