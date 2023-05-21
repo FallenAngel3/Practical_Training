@@ -14,4 +14,14 @@ public interface CommodityService {
 	Commodity getCommodityById(int id);
 	
 	void upd(Commodity commodity);
+
+	Map<String, Object> commodityList1();
+
+	Map<String, Object> commoditycclassList();
+
+
+	Map<String, Object> findById(int id);
+
+	Map<String, Object> indexsearch(String name);
+    void delsel(String ids);
 }

@@ -1,6 +1,7 @@
 package com.example.demo.mapper;
 
 import com.example.demo.bean.Commodity;
+import com.example.demo.bean.CommodityClass;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -16,4 +17,12 @@ public interface CommodityMapper {
 	Commodity getCommodityById(int id);
 	
 	void upd(Commodity commodity);
+
+	List<Commodity> commodityList1();
+
+	List<CommodityClass> commodityclassList();
+
+	List<Commodity> findById(int id);
+
+	List<Commodity> indexsearch(String name);
 }

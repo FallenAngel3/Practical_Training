@@ -5,6 +5,7 @@ import com.example.demo.service.CommodityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -61,5 +62,36 @@ public class CommodityController {
 		Commodity commodity = commodityService.getCommodityById(id);
 		map.put("data", commodity);
 		return map;
+	}
+
+	@RequestMapping("/commodityList1")
+	@ResponseBody
+	public Map<String, Object> commodityList1(){
+
+		return  commodityService.commodityList1();
+	}
+	@RequestMapping("/commodityclassList")
+	@ResponseBody
+	public Map<String, Object> commodityclassList(){
+
+		return  commodityService.commoditycclassList();
+	}
+	@RequestMapping("/findById")
+	@ResponseBody
+	public Map<String, Object> findById(int id){
+
+		return  commodityService.findById(id);
+	}
+	@RequestMapping("/delsel")
+	public String delsel(@RequestParam(value = "ids", defaultValue = "") String ids){
+		commodityService.delsel(ids);
+		return "redirect:/user/index";
+	}
+
+	@RequestMapping("/indexsearch")
+	@ResponseBody
+	public Map<String, Object> indexsearch(String name){
+
+		return  commodityService.indexsearch(name);
 	}
 }

@@ -51,11 +51,81 @@
             })
         })
     </script>
-    <script type="text/javascript">
+    <!--<script type="text/javascript">
         function classManage() {
             location.href = 'http://localhost:8080/class/classManage';
         }
+    </script>-->
+    <script type="text/javascript">
+        var urlParams = new URLSearchParams(window.location.search);
+        var info = urlParams.get('info');
+
+        if (info) {
+            console.log("恢复的信息:", info);
+            localStorage.setItem('info', info); // 将信息存储在localStorage中
+        }
+
+        function classManage() {
+            // 存储当前页面表单信息
+            localStorage.setItem('commodity_name', $("#commodity_name").val());
+            localStorage.setItem('commodity_price', $("#commodity_price").val());
+            localStorage.setItem('commodity_img', $("#file1").val());
+            localStorage.setItem('commodity_status', $("input[name='commodity_status']:checked").val());
+            localStorage.setItem('class_id', $("select[name='class_id']").val());
+            localStorage.setItem('commodity_num', $("#commodity_num").val());
+
+            location.href = 'http://localhost:8080/class/classManage';
+        }
+
+        function restoreInfo() {
+            var commodityName = localStorage.getItem('commodity_name');
+            var commodityPrice = localStorage.getItem('commodity_price');
+            var commodityImg = localStorage.getItem('commodity_img');
+            var commodityStatus = localStorage.getItem('commodity_status');
+            var classId = localStorage.getItem('class_id');
+            var commodityNum = localStorage.getItem('commodity_num');
+
+            // 更新表单信息
+            $("#commodity_name").val(commodityName);
+            $("#commodity_price").val(commodityPrice);
+            $("#file1").val(commodityImg);
+            $("#img").attr("src", commodityImg);
+            $("input[name='commodity_status'][value='" + commodityStatus + "']").prop("checked", true);
+            $("select[name='class_id']").val(classId);
+            $("#commodity_num").val(commodityNum);
+        }
+
+        $(document).ready(function() {
+            var urlParams = new URLSearchParams(window.location.search);
+            var fromClassManage = urlParams.get('fromClassManage');
+
+            if (fromClassManage) {
+                restoreInfo(); // 从classManage页面返回时恢复信息
+            }
+        });
+
     </script>
+    <script type="text/javascript">
+        function checkEmpty(){
+            var n = document.getElementById("commodity_name").value;
+            var p = document.getElementById("commodity_price").value;
+            var q = document.getElementById("commodity_num").value;
+            if (n == "" || p == "" || q == ""){
+                alert("商品重要信息不能为空");
+                return false;
+            }
+            if(p < 0 || q < 0){
+                alert("非法信息输入");
+                return false;
+            }
+        }
+    </script>
+    <script type="text/javascript">
+        function back(){
+            location.href = 'http://localhost:8080/user/index';
+        }
+    </script>
+
 </head>
 <body>
 <div class="container">
@@ -79,7 +149,7 @@
                 </div>
                 <div class="form-group">
                     <label>商品状态</label>
-                    <input type="radio" name="commodity_status" value="未上架"/>未上架
+                    <input type="radio" name="commodity_status" value="未上架" checked="checked"/>未上架
                     <input type="radio" name="commodity_status" value="已上架"/>已上架
                 </div>
                 <div class="form-group">
@@ -90,7 +160,10 @@
                 <div class="form-group">
                     <label>商品库存</label><input type="number" name="commodity_num" class="form-control" id="commodity_num"/>
                 </div>
-                <button type="submit" class="btn btn-default btn-primary">添加</button>
+                <button type="submit" class="btn btn-default btn-primary" onclick="return checkEmpty()">添加</button>
+                <button type="button" onclick="back()" class="btn btn-default btn-primary">返回</button>
+
+                </button>
             </form>
         </div>
         <div class="col-md-4 column">

@@ -29,4 +29,12 @@ public class IndexController {
 		map.put("img", base64);
 		return map;
 	}
+	@RequestMapping("/userindex")
+	public String index(){
+		return "Userindex";
+	}
+	@RequestMapping("/category")
+	public String category(){
+		return "category";
+	}
 }
