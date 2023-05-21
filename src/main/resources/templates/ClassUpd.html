@@ -20,33 +20,6 @@
       }
     }
   </script>
-  <!--<script type="text/javascript">
-    $(function (){
-      var id=$("#id").val();
-      $.ajax({
-        url:"http://localhost:8080/commodity/getCommodityById?id="+id,
-        dataType:"json",
-        type:"get",
-        success:function (res){
-          var data = res.data;
-          $("#id").val(data.id);
-          $("#commodity_name").val(data.commodity_name);
-          $("#commodity_price").val(data.commodity_price);
-          $("#img").attr("src", data.commodity_img);
-          $("#file1").val(data.commodity_img);
-          $(".commodity_status").map(function (){
-            if (this.value == data.commodity_status){
-              this.checked = true;
-            }
-          })
-          $("#commodity_num").val(data.commodity_num);
-        },
-        error:function (ref){
-
-        }
-      })
-    })
-  </script>-->
 </head>
 <body>
 <div class="container">
