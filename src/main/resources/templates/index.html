@@ -33,6 +33,9 @@
                             "<button style='width: 50%' onclick='upd(" + data[i].id + ")' class='btn btn-success btn-default'>修改</button>" +
                             "<button style='width: 50%' onclick='del(" + data[i].id + ")' class='btn btn-default btn-danger'>删除</button>" +
                             "</td>" +
+                            "<td>"+
+                            "<input type='checkbox'  name='email' id='delete_id' src="+data[i].id+">"+
+                            "</td>"+
                             "</tr>")
                     }
                 },
@@ -53,6 +56,18 @@
         function del(id) {
             location.href = "http://localhost:8080/commodity/commodity_del?id=" + id;
         }
+
+        function filterStatus() {
+            var status = $("#statusFilter").val();
+            $("table tbody tr").each(function () {
+                var rowStatus = $(this).find("td:eq(4)").text();
+                if (status === "all" || rowStatus === status) {
+                    $(this).show();
+                } else {
+                    $(this).hide();
+                }
+            });
+        }
     </script>
 
     <style>
@@ -64,8 +79,7 @@
         }
     </style>
 </head>
-<body>
-<!--动态背景(注：div里的两个id需要和js文件保持一致)-->
+<body background="/img/background.jpg" style=" background-repeat:no-repeat ;background-size:100% 100%; background-attachment: fixed;">
 <div id="background" style="position: absolute; z-index: -2">
     <canvas id="canvas"></canvas>
 </div>
@@ -77,6 +91,17 @@
             <button onclick="add()" type="button" class="btn btn-block btn-lg btn-info" style="margin-top: 10%">
                 新增
             </button>
+            <button type="button" onclick="selBtn(1)">全选</button>
+            <button type="button" onclick="selBtn(0)">取消全选</button>
+            <button type="button" onclick="delSel()">删除所选行</button>
+            <div class="form-group">
+                <label for="statusFilter">筛选状态：</label>
+                <select id="statusFilter" class="form-control" onchange="filterStatus()">
+                    <option value="all">全部</option>
+                    <option value="已上架">已上架</option>
+                    <option value="未上架">未上架</option>
+                </select>
+            </div>
             <table style="background: #ffffff" class="table table-bordered table-hover">
                 <thead>
                 <tr>
@@ -103,6 +128,9 @@
                     </th>
                 </tr>
                 </thead>
+                <tbody>
+                <!-- 商品列表将动态生成 -->
+                </tbody>
             </table>
             <nav class="navbar navbar-default navbar-fixed-top navbar-inverse" role="navigation">
                 <div class="navbar-header">
