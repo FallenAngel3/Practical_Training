@@ -69,8 +69,11 @@
                       "</h6>" +
                       "<a href=\"#\" class=\"text-muted\" data-abc=\"true\">Laptops & Notebooks</a>\n" +
                       "</div>" +
-                      " <h3 class=\"mb-0 font-weight-semibold\">￥"+ commodity[i].commodity_price + "</h3>" +
-                      "</div>"+
+                      "<div class=\"col-md-10 column\" align='left'>" +
+                      "<h4> 产品名：<a href=\"#\">" + commodity[i].commodity_name + "</h4>" +
+                      "<h4> 仅剩：<a href=\"#\">" + commodity[i].commodity_num + "</h4>" +
+                      "<h5> 价格：<a href=\"#\">" + commodity[i].commodity_price + "<h5>" +
+                      "</div>" +
                       "</div>";
               $("#tab").append(html);
             }
@@ -82,8 +85,7 @@
     })
 
 </script>
-
-  <style>
+<style>
   .bd-placeholder-img {
     font-size: 1.125rem;
     text-anchor: middle;
@@ -211,10 +213,8 @@
     </div>
 <center>
   <div id="tab" class="row" >
-</center>
-
 </div>
-
+</center>
 
 </body>
 </html>
