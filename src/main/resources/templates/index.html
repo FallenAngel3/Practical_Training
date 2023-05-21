@@ -204,7 +204,7 @@
     function delSel(){
         var delUrl ="http://localhost:8080/commodity/delsel?ids=";
         var ids ="";
-        //拿到要删除所有员工的id  $(".single_check:checked")表示选中框被选中的框
+        //拿到要删除所有id  $(".single_check:checked")表示选中框被选中的框
         $("#delete_id:checked").each(function(){
             //取出我们自定义的id    $(this)表示这全部选中的一个选中框
             ids=ids+$(this).attr("src")+",";
