@@ -28,4 +28,7 @@
     <select id="findById" resultType="com.example.demo.bean.Commodity" parameterType="int">
         select * from qianfeng.commodity where class_id = #{id}
     </select>
+    <select id="indexsearch" resultType="com.example.demo.bean.Commodity" parameterType="string">
+        select * from qianfeng.commodity where commodity_name = #{name}
+    </select>
 </mapper>

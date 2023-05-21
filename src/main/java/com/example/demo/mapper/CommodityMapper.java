@@ -23,4 +23,6 @@ public interface CommodityMapper {
 	List<CommodityClass> commodityclassList();
 
 	List<Commodity> findById(int id);
+
+	List<Commodity> indexsearch(String name);
 }

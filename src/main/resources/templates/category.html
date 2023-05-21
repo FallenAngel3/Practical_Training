@@ -53,22 +53,27 @@
                     })
                 })
         }
+        function re(){
+            location.href="http://localhost:8080/userindex";
+        }
     </script>
 </head>
 <body>
 <div class="container" style="margin-left: 0">
     <div class="row clearfix">
-        <div class="col-md-2 column" style="height: 10000px;width: 160px">
-            <div class="btn-group" >
+        <div class="col-md-3 column" style="height: 10000px;width: 160px">
+            <div class="btn-group" style="width: 160px">
+                <button onclick="re()" class="btn btn-default" >返回</button>
                 <button class="btn btn-default" >类别</button> <button data-toggle="dropdown" class="btn btn-default dropdown-toggle"><span class="caret"></span></button>
                 <ul class="dropdown-menu" id="ull">
                 </ul>
             </div>
         </div>
-        <div class="col-md-10 column"  id="left1" style="display: flex; flex-wrap: wrap;">
+        <div class="col-md-9 column"  id="left1" style="display: flex; flex-wrap: wrap;">
 
         </div>
     </div>
+
 </div>
 </body>
 </html>
