@@ -94,4 +94,6 @@ public class CommodityController {
 
 		return  commodityService.indexsearch(name);
 	}
+	
+	
 }

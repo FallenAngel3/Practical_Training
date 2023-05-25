@@ -78,6 +78,43 @@
             background-attachment: fixed;
         }
     </style>
+    <SCRIPT>
+        //  全选按钮和删除选中按钮功能
+        /* 全选框全选和取消全选 */
+        function selBtn(flag){
+
+            if(flag>1){
+                //大于0反选，等于自己本身选择状态取反
+                let emails = document.getElementsByName("email");
+
+                for (let email of emails) {
+
+                }
+            }else{
+                //为0和1时直接赋给状态，js中0为false，除0外都为true
+                let emails = document.getElementsByName("email");
+                for (let email of emails) {
+                    email.checked = flag;
+                }
+                let sels = document.getElementsByName("selAll");
+                for (let selAll of sels) {
+                    selAll.checked = flag;
+                }
+            }
+        }
+        function delSel(){
+            var delUrl ="http://localhost:8080/commodity/delsel?ids=";
+            var ids ="";
+            //拿到要删除所有员工的id  $(".single_check:checked")表示选中框被选中的框
+            $("#delete_id:checked").each(function(){
+                //取出我们自定义的id    $(this)表示这全部选中的一个选中框
+                ids=ids+$(this).attr("src")+",";
+            });
+            delUrl +=ids;
+            location.href  = delUrl ;
+        }
+
+    </SCRIPT>
 </head>
 <body background="/img/background.jpg" style=" background-repeat:no-repeat ;background-size:100% 100%; background-attachment: fixed;">
 <div id="background" style="position: absolute; z-index: -2">
@@ -88,15 +125,15 @@
 <div class="container">
     <div class="row clearfix">
         <div class="col-md-12 column">
-            <button onclick="add()" type="button" class="btn btn-block btn-lg btn-info" style="margin-top: 10%">
+            <button onclick="add()" type="button" class="btn btn-block btn-lg btn-info" style="margin-top: 5%">
                 新增
             </button>
-            <button type="button" onclick="selBtn(1)">全选</button>
-            <button type="button" onclick="selBtn(0)">取消全选</button>
-            <button type="button" onclick="delSel()">删除所选行</button>
+            <button type="button" class="btn btn-inverse btn-sm" onclick="selBtn(1)">全选</button>
+            <button type="button" class="btn btn-inverse btn-sm" onclick="selBtn(0)">取消全选</button>
+            <button type="button" class="btn btn-inverse btn-sm" onclick="delSel()">删除所选行</button>
             <div class="form-group">
-                <label for="statusFilter">筛选状态：</label>
-                <select id="statusFilter" class="form-control" onchange="filterStatus()">
+                <label for="statusFilter" style="font-size: 15px;" class="label label-primary">筛选状态：</label>
+                <select style="margin-top: 10px" id="statusFilter" class="form-control" onchange="filterStatus()">
                     <option value="all">全部</option>
                     <option value="已上架">已上架</option>
                     <option value="未上架">未上架</option>
@@ -132,83 +169,6 @@
                 <!-- 商品列表将动态生成 -->
                 </tbody>
             </table>
-            <nav class="navbar navbar-default navbar-fixed-top navbar-inverse" role="navigation">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse"
-                            data-target="#bs-example-navbar-collapse-1"><span
-                            class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span
-                            class="icon-bar"></span><span class="icon-bar"></span></button>
-                    <a class="navbar-brand" href="#">Brand</a>
-                </div>
-
-                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                    <ul class="nav navbar-nav">
-                        <li class="active">
-                            <a href="#">Link</a>
-                        </li>
-                        <li>
-                            <a href="#">Link</a>
-                        </li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown<strong
-                                    class="caret"></strong></a>
-                            <ul class="dropdown-menu">
-                                <li>
-                                    <a href="#">Action</a>
-                                </li>
-                                <li>
-                                    <a href="#">Another action</a>
-                                </li>
-                                <li>
-                                    <a href="#">Something else here</a>
-                                </li>
-                                <li class="divider">
-                                </li>
-                                <li>
-                                    <a href="#">Separated link</a>
-                                </li>
-                                <li class="divider">
-                                </li>
-                                <li>
-                                    <a href="#">One more separated link</a>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                    <form class="navbar-form navbar-left" role="search">
-                        <div class="form-group">
-                            <input type="text" class="form-control"/>
-                        </div>
-                        <button type="submit" class="btn btn-default">Submit</button>
-                    </form>
-                    <ul class="nav navbar-nav navbar-right">
-                        <li>
-                            <a href="#">Link</a>
-                        </li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown<strong
-                                    class="caret"></strong></a>
-                            <ul class="dropdown-menu">
-                                <li>
-                                    <a href="#">Action</a>
-                                </li>
-                                <li>
-                                    <a href="#">Another action</a>
-                                </li>
-                                <li>
-                                    <a href="#">Something else here</a>
-                                </li>
-                                <li class="divider">
-                                </li>
-                                <li>
-                                    <a href="#">Separated link</a>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
-
-            </nav>
         </div>
     </div>
 </div>
