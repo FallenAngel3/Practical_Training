@@ -91,7 +91,8 @@ public class CommodityController {
 	@RequestMapping("/indexsearch")
 	@ResponseBody
 	public Map<String, Object> indexsearch(String name){
-
+		/*加入%使得可以模糊搜索*/
+		name = "%" + name + "%";
 		return  commodityService.indexsearch(name);
 	}
 	

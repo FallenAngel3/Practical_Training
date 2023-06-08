@@ -29,6 +29,6 @@
         select * from qianfeng.commodity where class_id = #{id}
     </select>
     <select id="indexsearch" resultType="com.example.demo.bean.Commodity" parameterType="string">
-        select * from qianfeng.commodity where commodity_name = #{name}
+        select * from qianfeng.commodity where commodity_name like #{name}
     </select>
 </mapper>
